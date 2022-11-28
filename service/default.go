@@ -22,6 +22,6 @@ func NotImplemented(ctx *gin.Context) {
 // Error returns a handler which renders error.html
 func Error(code int, message string) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		ctx.HTML(code, "error.html", gin.H{"Code": code, "Error": message})
+		ctx.JSON(code, gin.H{"message": message})
 	}
 }

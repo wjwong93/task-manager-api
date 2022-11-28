@@ -1,5 +1,15 @@
 {{ template "header" . }}
 <h1>List of tasks</h1>
+<form action="/list" method="get">
+    <input type="text" name="kw" value="{{ .Kw }}" />
+    <select name="completed">
+        <option value="" {{ if eq .Status "" }}selected{{ end }}>すべて</option>
+        <option value="t" {{ if eq .Status "t" }}selected{{ end }}>完了</option>
+        <option value="f" {{ if eq .Status "f" }}selected{{ end }}>未完了</option>
+    </select>
+    <input type="submit" value="検索" />
+</form>
+<p><a href="/task/new">新規登録</a> <a href="/">トップページ</a> <a href="/logout">ログアウト</a></p>
 {{ if not .Tasks }}
 <p>登録データがありません．</p>
 {{ else }}
@@ -7,14 +17,18 @@
     <tr>
         <th>ID</th>
         <th>タイトル</th>
+        <th>優先度</th>
         <th>登録日</th>
+        <th>締切日</th>
         <th>状態</th>
     </tr>
     {{ range $task := .Tasks }}
     <tr>
         <td><a href="/task/{{ $task.ID }}">{{ $task.ID }}</a></td>
         <td>{{ $task.Title }}</td>
+        <td>{{ $task.Priority }}</td>
         <td>{{ $task.CreatedAt }}</td>
+        <td>{{ $task.DueDate }}</td>
         <td>{{ if $task.IsDone }}済{{ end }}</td>
     </tr>
     {{ end }}
