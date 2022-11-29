@@ -53,20 +53,20 @@ func main() {
 	taskGroup := engine.Group("/task")
 	taskGroup.Use(service.LoginCheck) 
 	{
-		taskGroup.GET("/:id", service.ShowTask) // ":id" is a parameter
-		taskGroup.GET("/new", service.NewTaskForm)
+		// taskGroup.GET("/:id", service.ShowTask) // ":id" is a parameter
+		// taskGroup.GET("/new", service.NewTaskForm)
 		taskGroup.POST("/new", service.RegisterTask)
-		taskGroup.GET("/edit/:id", service.EditTaskForm)
+		// taskGroup.GET("/edit/:id", service.EditTaskForm)
 		// taskGroup.POST("/edit/:id", service.UpdateTask)
 		taskGroup.PUT("/:id", service.UpdateTask)
 		taskGroup.DELETE("/:id", service.DeleteTask)
 	}
 
-	engine.GET("/login", service.LoginForm)
+	// engine.GET("/login", service.LoginForm)
 	engine.POST("/login", service.Login)
 	engine.GET("/logout", service.Logout)
 
-	engine.GET("/user/new", service.NewUserForm)
+	// engine.GET("/user/new", service.NewUserForm)
 	engine.POST("/user/new", service.RegisterNewUser)
 
 	userGroup := engine.Group("/user")
@@ -75,7 +75,7 @@ func main() {
 		userGroup.GET("/name", service.GetUsername)
 		userGroup.PUT("/name", service.ChangeUsername)
 		userGroup.PUT("/password", service.ChangePassword)
-		userGroup.PUT("/delete", service.DeleteUser)
+		userGroup.POST("/delete", service.DeleteUser)
 	}
 
 	// start server
